@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+}
+
+#question-section h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 60px;
+}
+
+.btn {
+    padding: 15px 40px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.yes-btn {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.yes-btn:hover {
+    background-color: #ff5252;
+    transform: scale(1.05);
+}
+
+.no-btn {
+    background-color: #74b9ff;
+    color: white;
+}
+
+.no-btn:hover {
+    background-color: #0984e3;
+}
+
+#success-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#success-section h1 {
+    color: #ff6b6b;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#success-section p {
+    color: #666;
+    font-size: 1.2em;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.confetti {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    height: 100px;
+}
+
+.confetti span {
+    width: 15px;
+    height: 15px;
+    background: #ff6b6b;
+    display: inline-block;
+    animation: fall 3s infinite;
+    border-radius: 50%;
+}
+
+.confetti span:nth-child(2) {
+    background: #74b9ff;
+    animation-delay: 0.2s;
+}
+
+.confetti span:nth-child(3) {
+    background: #ffd93d;
+    animation-delay: 0.4s;
+}
+
+.confetti span:nth-child(4) {
+    background: #6bcf7f;
+    animation-delay: 0.6s;
+}
+
+.confetti span:nth-child(5) {
+    background: #a8e6cf;
+    animation-delay: 0.8s;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+}
