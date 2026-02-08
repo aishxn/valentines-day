@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="question-section">
+            <h1>Will you be my Valentine? 💝</h1>
+            <div class="button-container">
+                <button id="yes-btn" class="btn yes-btn">Yes</button>
+                <button id="no-btn" class="btn no-btn">No</button>
+            </div>
+        </div>
+
+        <div id="success-section" style="display: none;">
+            <h1>Yay! I knew you'd say yes! 🎉💕</h1>
+            <p>You just made me the happiest person ever! 😊</p>
+            <div class="confetti">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+}
+
+#question-section h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 60px;
+}
+
+.btn {
+    padding: 15px 40px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.yes-btn {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.yes-btn:hover {
+    background-color: #ff5252;
+    transform: scale(1.05);
+}
+
+.no-btn {
+    background-color: #74b9ff;
+    color: white;
+}
+
+.no-btn:hover {
+    background-color: #0984e3;
+}
+
+/* Success section */
+#success-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#success-section h1 {
+    color: #ff6b6b;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#success-section p {
+    color: #666;
+    font-size: 1.2em;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Confetti animation */
+.confetti {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    height: 100px;
+}
+
+.confetti span {
+    width: 15px;
+    height: 15px;
+    background: #ff6b6b;
+    display: inline-block;
+    animation: fall 3s infinite;
+    border-radius: 50%;
+}
+
+.confetti span:nth-child(2) {
+    background: #74b9ff;
+    animation-delay: 0.2s;
+}
+
+.confetti span:nth-child(3) {
+    background: #ffd93d;
+    animation-delay: 0.4s;
+}
+
+.confetti span:nth-child(4) {
+    background: #6bcf7f;
+    animation-delay: 0.6s;
+}
+
+.confetti span:nth-child(5) {
+    background: #a8e6cf;
+    animation-delay: 0.8s;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+}
+const yesBtn = document.getElementById('yes-btn');
+const noBtn = document.getElementById('no-btn');
+const questionSection = document.getElementById('question-section');
+const successSection = document.getElementById('success-section');
+
+// Messages for the No button
+const sadMessages = [
+    'No',
+    'Are you sure?',
+    'Really sure?',
+    'Think again!',
+    'Last chance!',
+    'Surely not?',
+    'Come on!',
+    'Pretty please?',
+    'With a cherry on top?',
+    'Pls pls pls?',
+    'I\'m gonna cry...',
+    'You\'re breaking my heart 💔',
+    'Reconsider?',
+    'Nah, just click Yes',
+    'Pleeease? 🥺'
+];
+
+let noClickCount = 0;
+
+yesBtn.addEventListener('click', function() {
+    questionSection.style.display = 'none';
+    successSection.style.display = 'block';
+});
+
+noBtn.addEventListener('click', function() {
+    noClickCount++;
+    
+    // Change the No button text
+    if (noClickCount < sadMessages.length) {
+        noBtn.textContent = sadMessages[noClickCount];
+    }
+    
+    // Make the Yes button bigger
+    const currentSize = yesBtn.offsetWidth;
+    yesBtn.style.width = (currentSize + 20) + 'px';
+    yesBtn.style.padding = '15px ' + (40 + (noClickCount * 5)) + 'px';
+    yesBtn.style.fontSize = (1.1 + (noClickCount * 0.1)) + 'em';
+    
+    // Make the No button smaller and move it around
+    const randomX = (Math.random() - 0.5) * 200;
+    const randomY = (Math.random() - 0.5) * 200;
+    noBtn.style.transform = `translate(${randomX}px, ${randomY}px) scale(${Math.max(0.5, 1 - (noClickCount * 0.05))})`;
+    
+    // Optional: Make the No button harder to click
+    if (noClickCount > 3) {
+        noBtn.style.pointerEvents = 'none';
+        noBtn.style.opacity = '0.5';
+        setTimeout(() => {
+            noBtn.style.pointerEvents = 'auto';
+            noBtn.style.opacity = '1';
+        }, 500);
+    }
+});
